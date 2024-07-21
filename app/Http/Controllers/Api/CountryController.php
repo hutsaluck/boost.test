@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CountryResource;
+use App\Http\Requests\CountryRequest;
 use App\Models\Country;
 use Illuminate\Http\Request;
 
@@ -14,13 +14,8 @@ class CountryController extends Controller
         return Country::all();
     }
 
-    public function store(Request $request)
+    public function store(CountryRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'planned_weight' => 'required|numeric',
-        ]);
-
         return Country::create($request->all());
     }
 
@@ -29,13 +24,8 @@ class CountryController extends Controller
         return $country;
     }
 
-    public function update(Request $request, Country $country)
+    public function update(CountryRequest $request, Country $country)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'planned_weight' => 'required|numeric',
-        ]);
-
         $country->update($request->all());
         return $country;
     }

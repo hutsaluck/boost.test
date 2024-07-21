@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
@@ -19,14 +20,8 @@ class CompanyController extends Controller
         return response()->json($posts);
     }
 
-    public function store(Request $request)
+    public function store(CompanyRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:companies',
-            'country_id' => 'required|exists:countries,id',
-        ]);
-
         return Company::create($request->all());
     }
 
@@ -35,14 +30,8 @@ class CompanyController extends Controller
         return $company->load('country');
     }
 
-    public function update(Request $request, Company $company)
+    public function update(CompanyRequest $request, Company $company)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:companies,email,' . $company->id,
-            'country_id' => 'required|exists:countries,id',
-        ]);
-
         $company->update($request->all());
         return $company;
     }

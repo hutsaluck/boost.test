@@ -54,21 +54,4 @@ class ReportController extends Controller
 
         return response()->json($report);
     }
-
-    public function showReport(Request $request)
-    {
-        $month = $request->input('month');
-
-        $report = DB::table('minings')
-            ->select('countries.name as country', DB::raw('SUM(minings.weight) as mined'), 'countries.planned_weight as plan')
-            ->join('companies', 'minings.company_id', '=', 'companies.id')
-            ->join('countries', 'companies.country_id', '=', 'countries.id')
-            ->whereMonth('minings.date', $month)
-            ->groupBy('countries.name', 'countries.planned_weight')
-            ->havingRaw('SUM(minings.weight) > countries.planned_weight')
-            ->orderBy(DB::raw('SUM(minings.weight)'), 'desc')
-            ->get();
-
-        return response()->json($report);
-    }
 }
