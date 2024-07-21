@@ -2,7 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company;
+use App\Models\Country;
+use App\Models\Mining;
 use App\Models\User;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,11 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $countries = Country::COUNTRIES;
+        collect( $countries )->each( function ( $country ) {
+            Country::create( $country );
+        } );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $companies = Company::factory( count( $countries) )->create();
+
+        Mining::factory( count( $companies) )->create();
     }
 }
