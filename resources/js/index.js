@@ -2,9 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Countries from './components/Countries.vue';
 import Companies from './components/Companies.vue';
 import Leaders from './components/Leaders.vue';
-import App from "./components/App.vue";
+import Home from "./components/Home.vue";
 
 const routes = [
+    {
+        path: '/',
+        name: 'Home',
+        component: Home
+    },
     {
         path: '/countries',
         name: 'Countries',
