@@ -88,12 +88,12 @@ export default {
             } else {
                 await axios.post('/api/companies', this.company);
             }
-            this.fetchCompanies();
+            await this.fetchCompanies();
             this.showForm = false;
         },
         async deleteCompany(id) {
             await axios.delete(`/api/companies/${id}`);
-            this.fetchCompanies();
+            await this.fetchCompanies();
         },
         async editCompany(id) {
             const response = await axios.get(`/api/companies/${id}`);

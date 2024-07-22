@@ -8,7 +8,6 @@ use App\Models\Country;
 use App\Models\Mining;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 
 class ReportController extends Controller
