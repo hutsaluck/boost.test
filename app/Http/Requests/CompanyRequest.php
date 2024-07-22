@@ -23,7 +23,7 @@ class CompanyRequest extends FormRequest
     {
         return [
             'name'       => [ 'required', 'string', 'max:255' ],
-            'email'      => [ 'required', 'email', 'unique:companies' ],
+            'email'      => [ 'required', 'email' ],
             'country_id' => [ 'required', 'exists:countries,id' ],
         ];
     }
